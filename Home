@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Gymnasium Nackenheim</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    body {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    body.page-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background-color: #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .header h1 {
+      font-size: 22px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .full-bg-image {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: calc(100% - 80px);
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .content {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      z-index: 2;
+      backdrop-filter: brightness(0.85);
+    }
+
+    .content img.logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    .editable-text {
+      font-size: 20px;
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .address {
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('page-visible');
+    });
+
+    function fadeToPage(url) {
+      document.body.classList.remove('page-visible');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 600);
+    }
+  </script>
+</head>
+<body>
+  <div class="header">
+    <h1>Lehrer am Gymnasium Nackenheim</h1>
+    <button onclick="fadeToPage('lehrer.html')">Lehrer</button>
+  </div>
+
+  <img src="schule-nackenheim.png" alt="Schulbild" class="full-bg-image">
+
+  <div class="content">
+    <div class="editable-text">
+      <p>Diese Webseite ist aus einer Idee von Klara&Leonard entstanden.</p>
+    </div>
+    <div class="address">
+      Pommardstraße 17<br>
+      55299 Nackenheim
+    </div>
+  </div>
+</body>
+</html>
