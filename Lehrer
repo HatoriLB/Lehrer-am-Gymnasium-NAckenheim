@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Lehrer - Gymnasium Nackenheim</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      overflow-x: hidden;
+      background-image: url('klassenzimmer.jpg'); /* Das Hintergrundbild */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed; /* Macht das Hintergrundbild fest */
+    }
+
+    body {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    body.page-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background-color: #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .header h1 {
+      font-size: 22px;
+    }
+
+    button {
+      padding: 15px 25px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .content {
+      margin-top: 120px;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      backdrop-filter: brightness(0.85);
+    }
+
+    .content img.logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    .editable-text {
+      font-size: 20px;
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .address {
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .profiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Zentriert die Profile horizontal */
+  align-items: center;     /* Zentriert die Profile vertikal */
+  gap: 30px;
+  margin-top: 30px;
+}
+
+    .profile {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: calc(100% / 10 - 30px); /* 10 Profile in einer Reihe */
+  margin: 10px; /* Abstand zwischen den Profilen */
+}
+
+    .profile:hover {
+      transform: scale(1.05);
+    }
+
+    .profile img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      margin-bottom: 8px;
+    }
+
+    .profile .name {
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .info-box {
+      margin-top: 30px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      margin-top: 50px;
+      font-size: 28px;
+      color: #fff;
+    }
+  </style>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('page-visible');
+    });
+
+    function fadeToPage(url) {
+      document.body.classList.remove('page-visible');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 600);
+    }
+
+    function showInfo(person) {
+      const infoBox = document.getElementById('infoBox');
+      let text = '';
+
+      switch(person) {
+  case 'schwebler':
+    text = "<h3>Frau Schwebler</h3><p>Fächer: Schulentwicklung und Didaktik</p><br><p>AG´s: Lego Roboter.</p><br><p>Merkmale: Setzt sich für innovative Lehrmethoden und kontinuierliche Weiterentwicklung der Schule ein.</p>";
+    break;
+  case 'zinecker':
+    text = "<h3>Herr Zinecker</h3><p>Fächer: Stundenplanung und Organisation</p><br><p>Merkmale: Verantwortlich für reibungslose schulische Abläufe und organisatorische Belange.</p>";
+    break;
+  case 'schmitt':
+    text = "<h3>Herr Schmitt</h3><p>Fächer: Didaktik und digitale Medien</p><br><p>Merkmale: Fördert moderne Technologien im Unterricht und begleitet schulische Projekte.</p>";
+    break;
+  case 'mueller':
+    text = "<h3>Herr Müller</h3><p>Fächer: Physik & Mathematik</p><br><p>Merkmale: Kann gut erklären, bekannt für praxisorientierte Unterrichtsmethoden und Engagement im naturwissenschaftlichen Bereich.</p>";
+    break;
+  case 'jung' :
+     text = "<h3>Herr Jung</h3><p>Name: Carsten Jung</p><br><p>Fächer: Mathematik & Informatik</p><br><p>Merkmale: Kann nicht gut erklären und gibt nur Bettermarksaufgaben im Unterricht. Dabei spielt er auf seinem Computer Casino Royal</p>";
+    break
+  default: 
+    text = "<p>Weitere Informationen folgen.</p>";
+}
+
+
+
+      infoBox.innerHTML = text;
+    }
+  </script>
+</head>
+<body>
+  <div class="header">
+    <h1>Lehrer am Gymnasium Nackenheim</h1>
+    <button onclick="fadeToPage('Home.html')">Home</button>
+  </div>
+
+  <div class="full-bg-container"></div>
+
+  <div class="content">
+    <div class="editable-text">
+      <p>Hier stehen Informationen über die Lehrkräfte.</p><br></p>Diese können ungenau sein!!!</p>
+    </div>
+
+        <div id="infoBox" class="info-box"></div>
+
+    <h2>Schulleitung</h2>
+    <div class="profiles">
+      <div class="profile" onclick="showInfo('schwebler')">
+        <img src="Profilbild.png" alt="Frau Schwebler">
+        <p class="name">Frau Schwebler</p>
+      </div>
+      <div class="profile" onclick="showInfo('zinecker')">
+        <img src="Profilbild.png" alt="Herr Zinecker">
+        <p class="name">Herr Zinecker</p>
+      </div>
+      <div class="profile" onclick="showInfo('schmitt')">
+        <img src="Profilbild.png" alt="Herr Schmitt">
+        <p class="name">Herr Schmitt</p>
+      </div>
+    </div>
+
+    <h2>Lehrkräfte</h2>
+<div class="profiles">
+<div class="profiles">
+  <div class="profile" onclick="showInfo('mueller')">
+    <img src="Profilbild.png" alt="Herr Müller">
+    <p class="name">Herr müller</p>
+  </div>
+  <div class="profile" onclick="showInfo('jung')">
+    <img src="Herr Jung.jpeg" alt="Herr Jung">
+    <p class="name">Herr Jung</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 3</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 4</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 5</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 6</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 7</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 8</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 9</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 10</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 11</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 12</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 13</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 14</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 15</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 16</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 17</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 18</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 19</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 20</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 21</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 22</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 23</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 24</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 25</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 26</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 27</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 28</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 29</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 30</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 31</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 32</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 33</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 34</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 35</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 36</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 37</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 38</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 39</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 40</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 41</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 42</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 43</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 44</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 45</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 46</p>
+  </div>
+    <div class="profile" onclick="showInfo('lehrer1')">
+    <img src="Profilbild.png" alt="Lehrer 1">
+    <p class="name">Lehrer 47</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer2')">
+    <img src="Profilbild.png" alt="Lehrer 2">
+    <p class="name">Lehrer 48</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer3')">
+    <img src="Profilbild.png" alt="Lehrer 3">
+    <p class="name">Lehrer 49</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer4')">
+    <img src="Profilbild.png" alt="Lehrer 4">
+    <p class="name">Lehrer 50</p>
+  </div>
+  <div class="profile" onclick="showInfo('lehrer5')">
+    <img src="Profilbild.png" alt="Lehrer 5">
+    <p class="name">Lehrer 51</p>
+  </div>
+  
+</div>
+
+  
+</div>
+
+  </div>
+</body>
+</html>
